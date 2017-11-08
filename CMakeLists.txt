@@ -16,14 +16,18 @@ if(WIN32)
   add_compile_options(/W4)
 
   set(PLATFORM_SOURCES 
-    src/Platform/Windows/graphics.cpp
     src/Platform/Windows/Win32Environment.cpp
     src/Platform/Windows/Win32Filesystem.cpp
     src/Platform/Windows/Win32Filesystem.h
+    src/Platform/Windows/Win32Graphics.cpp 
   )
 
   set(PLATFORM_MAIN
-    src/Platform/Win32/Win32Main.cpp  
+    src/Platform/Windows/Win32Main.cpp  
+  )
+
+  set(PLATFORM_OPTIONS 
+    WIN32
   )
 elseif(APPLE)
   add_definitions(-std=c++1z)
@@ -44,6 +48,7 @@ elseif(APPLE)
 endif()
 
 add_executable(Stantz
+  ${PLATFORM_OPTIONS}
   ${PLATFORM_MAIN}
   ${PLATFORM_SOURCES}
   ${COMMON_SOURCES}
@@ -75,6 +80,8 @@ add_executable(Tests
 )
 
 #common dependencies
+find_package(OpenGL REQUIRED)
+target_link_libraries(Tests ${OPENGL_LIBRARIES})
 target_link_libraries(Tests Catch)
 
 #platform dependencies

@@ -60,8 +60,6 @@ int CALLBACK WinMain(
   InitGraphics(window);
   ShowWindow(window, nCmdShow);
 
-  
-
   /* main message loop */
   MSG windowMessage = {};  
   while(GetMessage(&windowMessage, NULL, 0, 0)) { 
