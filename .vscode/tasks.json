@@ -13,7 +13,10 @@
         "cwd": "${workspaceFolder}/build"
       },
       "taskName": "CMake: Build",
-      "type": "shell"
+      "type": "shell", 
+      "osx": {
+        "command": "cmake --build ." 
+      }
     },
     {
       "command": "cmake ..",

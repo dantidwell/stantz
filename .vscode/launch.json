@@ -2,6 +2,32 @@
     "version": "0.2.0",
     "configurations": [
       {
+        "name": "(OSX) Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "preLaunchTask": "CMake: Build",
+        "program": "${workspaceRoot}/build/Stantz",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "lldb"
+      },
+      {
+        "name": "(OSX) Test",
+        "type": "cppdbg",
+        "request": "launch",
+        "preLaunchTask": "CMake: Build",
+        "program": "${workspaceRoot}/build/Tests",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "lldb"
+      },
+      {
         "name": "(Windows) Launch",
         "type": "cppvsdbg",
         "request": "launch",
@@ -24,6 +50,6 @@
         "cwd": "${workspaceRoot}/build/Debug",
         "environment": [],
         "externalConsole": false
-      }      
+      }
     ]
   }

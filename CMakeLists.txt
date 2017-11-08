@@ -1,43 +1,84 @@
 cmake_minimum_required(VERSION 3.2.2)
 project(stantz)
 
-find_package(OpenGL REQUIRED)
-find_package(Git REQUIRED)
+########################
+# Executable
+########################
 
-if(MSVC) 
+set(COMMON_SOURCES
+  src/Platform/Filesystem.h
+)
+
+if(WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
   add_definitions(-DUNICODE)
   add_compile_options(/std:c++latest)
   add_compile_options(/W4)
-else() 
-  # add_compile_options(-Wall -Wextra -Wpedantic)
-endif() 
 
-add_executable(Stantz WIN32
-  src/Platform/Windows/graphics.cpp
-  src/Platform/Windows/main.cpp
-  src/Platform/Windows/Win32Environment.cpp
-  src/Platform/Windows/Win32Filesystem.cpp
-  src/Platform/Windows/Win32Filesystem.h
-  src/Platform/Filesystem.h
-  src/Rendering/Image.h
-  src/Sound/Sound.h
+  set(PLATFORM_SOURCES 
+    src/Platform/Windows/graphics.cpp
+    src/Platform/Windows/Win32Environment.cpp
+    src/Platform/Windows/Win32Filesystem.cpp
+    src/Platform/Windows/Win32Filesystem.h
+  )
+
+  set(PLATFORM_MAIN
+    src/Platform/Win32/Win32Main.cpp  
+  )
+elseif(APPLE)
+  add_definitions(-std=c++1z)
+
+  set(PLATFORM_SOURCES
+    src/Platform/OSX/OSXFilesystem.h
+    src/Platform/OSX/OSXFilesystem.mm
+  )
+
+  set(PLATFORM_MAIN
+    src/Platform/OSX/OSXMain.cpp  
+  )
+
+  find_library(OSX_FOUNDATION_LIBRARY CoreFoundation)
+  set(PLATFORM_LIBS 
+    ${OSX_FOUNDATION_LIBRARY}
+  )
+endif()
+
+add_executable(Stantz
+  ${PLATFORM_MAIN}
+  ${PLATFORM_SOURCES}
+  ${COMMON_SOURCES}
 )
 
+#common dependencies
+find_package(OpenGL REQUIRED)
 target_link_libraries(Stantz ${OPENGL_LIBRARIES})
 
-# Prepare "Catch" library for other executables
-set(CATCH_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ext/include)
+#platform dependencies
+target_link_libraries(Stantz ${PLATFORM_LIBS})
+
+########################
+# Unit Tests
+########################
+
+set(CATCH_INCLUDE_DIR ext/include)
 add_library(Catch INTERFACE)
 target_include_directories(Catch INTERFACE ${CATCH_INCLUDE_DIR})
 
-# Make test executable
-set(TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/test/Main.cpp)
-add_executable(tests 
-  src/Platform/Windows/Win32Filesystem.cpp
-  ${TEST_SOURCES}
+set(TEST_SOURCES
+  test/Main.cpp
 )
-target_link_libraries(tests Catch)
+
+add_executable(Tests 
+  ${TEST_SOURCES}
+  ${PLATFORM_SOURCES}
+  ${COMMON_SOURCES}
+)
+
+#common dependencies
+target_link_libraries(Tests Catch)
+
+#platform dependencies
+target_link_libraries(Tests ${PLATFORM_LIBS})
 
 # Test data 
-file(COPY test/Data DESTINATION Debug/)
+file(COPY test/Data DESTINATION ./)
