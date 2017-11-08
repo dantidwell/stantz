@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "(Windows) Launch",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "preLaunchTask": "CMake: Build",
+        "program": "${workspaceRoot}/build/Debug/Stantz.exe",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": false
+      }, 
+      {
+        "name": "(Windows) Test",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "preLaunchTask": "CMake: Build",
+        "program": "${workspaceRoot}/build/Debug/tests.exe",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceRoot}/build/Debug",
+        "environment": [],
+        "externalConsole": false
+      }      
+    ]
+  }
