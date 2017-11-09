@@ -19,3 +19,13 @@ Stantz::Platform::OSXFile::~OSXFile() {
 bool Stantz::Platform::OSXFile::IsOpen() { 
   return osxFileHandle != nil; 
 }
+
+int Stantz::Platform::OSXFile::Read(void *buffer, int32_t offset, int32_t count) {
+  NSData *result = [osxFileHandle readDataOfLength:count];
+  auto numBytesRead = result.length;
+  
+  memcpy(buffer, result.bytes, numBytesRead);
+  
+  [result release];
+  return numBytesRead;
+};

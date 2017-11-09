@@ -19,7 +19,7 @@
       }
     },
     {
-      "command": "cmake ..",
+      "command": "cmake .. -G Xcode",
       "options": {
         "cwd": "${workspaceFolder}/build"
       },

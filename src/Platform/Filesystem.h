@@ -17,11 +17,9 @@ namespace Stantz::Platform {
 
     const std::string Name;
 
-    // virtual bool IsEndOfFile() = 0;
     virtual bool IsOpen() = 0;
-    
-    // virtual int ReadBytes(uint8_t *buffer, int32_t offset, int32_t count) = 0;
-  protected: 
+    virtual int Read(void *buffer, int32_t offset, int32_t count) = 0;
+  protected:
     File(const std::string &name) : 
       Name(name) 
     {}

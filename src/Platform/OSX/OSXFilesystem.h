@@ -10,6 +10,7 @@ namespace Stantz::Platform {
     OSXFile(const std::string &fileName);
     ~OSXFile();
     bool IsOpen();
+    int Read(void *buffer, int32_t offset, int32_t count);
   private: 
     NSFileHandle *osxFileHandle;
   };

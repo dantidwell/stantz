@@ -7,6 +7,8 @@ project(stantz)
 
 set(COMMON_SOURCES
   src/Platform/Filesystem.h
+  src/Platform/Sound.h
+  src/Sound/Sound.h
 )
 
 if(WIN32)
@@ -35,6 +37,7 @@ elseif(APPLE)
   set(PLATFORM_SOURCES
     src/Platform/OSX/OSXFilesystem.h
     src/Platform/OSX/OSXFilesystem.mm
+    src/Platform/OSX/OSXSound.mm
   )
 
   set(PLATFORM_MAIN
@@ -42,7 +45,9 @@ elseif(APPLE)
   )
 
   find_library(OSX_FOUNDATION_LIBRARY CoreFoundation)
+  find_library(OSX_AUDIO_LIBRARY AudioToolbox)
   set(PLATFORM_LIBS 
+    ${OSX_AUDIO_LIBRARY}  
     ${OSX_FOUNDATION_LIBRARY}
   )
 endif()
