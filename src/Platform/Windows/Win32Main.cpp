@@ -1,5 +1,7 @@
 #include <windows.h> 
 
+#include "../Sound.h"
+
 void InitGraphics(HWND window);
 void Draw();
 
@@ -58,6 +60,8 @@ int CALLBACK WinMain(
   );
 
   InitGraphics(window);
+  Stantz::Platform::Sound::Startup();
+
   ShowWindow(window, nCmdShow);
 
   /* main message loop */

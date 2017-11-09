@@ -1,7 +1,0 @@
-void LoadImageAsync() { 
-
-}
-
-void LoadSoundAsync() { 
-  
-}

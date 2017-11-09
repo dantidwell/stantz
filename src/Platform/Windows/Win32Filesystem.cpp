@@ -53,6 +53,21 @@ bool Stantz::Platform::Win32File::IsOpen() {
   return win32FileHandle != INVALID_HANDLE_VALUE;  
 }
 
-/**
- * Win32 FileSystem Implementation 
- */
+int Stantz::Platform::Win32File::Read(void *buffer, int32_t offset, int32_t count) { 
+  UNREFERENCED_PARAMETER(offset);
+  
+  DWORD numBytesRead = 0;
+  
+  auto result = ReadFile(
+    win32FileHandle,
+    buffer,
+    count,
+    &numBytesRead,
+    nullptr
+  );
+
+  if(!result) { 
+    return 0;
+  }
+  return numBytesRead;
+}

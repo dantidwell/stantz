@@ -11,6 +11,7 @@ namespace Stantz::Platform {
     Win32File(const std::string &fileName);
     ~Win32File();
     bool IsOpen();
+    int Read(void *buffer, int32_t offset, int32_t count);
   private: 
     HANDLE win32FileHandle;
   };

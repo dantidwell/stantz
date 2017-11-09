@@ -6,9 +6,12 @@ project(stantz)
 ########################
 
 set(COMMON_SOURCES
+  src/Stantz.h
   src/Platform/Filesystem.h
   src/Platform/Sound.h
   src/Sound/Sound.h
+  src/Sound/Wave.cpp
+  src/Sound/Wave.h
 )
 
 if(WIN32)
@@ -22,6 +25,7 @@ if(WIN32)
     src/Platform/Windows/Win32Filesystem.cpp
     src/Platform/Windows/Win32Filesystem.h
     src/Platform/Windows/Win32Graphics.cpp 
+    src/Platform/Windows/Win32Sound.cpp
   )
 
   set(PLATFORM_MAIN
