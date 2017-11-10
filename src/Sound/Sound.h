@@ -1,10 +1,11 @@
 #ifndef __SOUND_H__
 #define __SOUND_H__
 
-#include "Wave.h"
+#include "../Stantz.h"
 
-namespace Stantz::Common::Sound { 
-  //TODO: something
+#include "SoundSample.h"
+
+namespace Stantz::Common::Sound {
 };
 
 #endif

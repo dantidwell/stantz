@@ -8,6 +8,5 @@
 
 //Platform services 
 #include "Platform/FileSystem.h"
-#include "Platform/Sound.h"
 
 #endif

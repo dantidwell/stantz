@@ -10,8 +10,8 @@ set(COMMON_SOURCES
   src/Platform/Filesystem.h
   src/Platform/Sound.h
   src/Sound/Sound.h
-  src/Sound/Wave.cpp
-  src/Sound/Wave.h
+  src/Sound/SoundSample.cpp
+  src/Sound/SoundSample.h
 )
 
 if(WIN32)
@@ -34,6 +34,11 @@ if(WIN32)
 
   set(PLATFORM_OPTIONS 
     WIN32
+  )
+
+  # find_package(xaudio2 REQUIRED)
+  set(PLATFORM_LIBS
+    xaudio2_8
   )
 elseif(APPLE)
   add_definitions(-std=c++1z)
